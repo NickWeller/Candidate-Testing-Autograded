@@ -3,78 +3,91 @@ const input = require('readline-sync');
 // TODO 2: modify your quiz app to ask 5 questions //
 
 // TODO 1.1a: Define candidateName // 
-let candidateName = " ";
+let candidateName="";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
-let question = "Who was the first American woman in space? ";
+let question= "Who was the first American woman in space? ";
 let correctAnswer = "Sally Ride";
-let candidateAnswer = "";
-//TODO: Variables for Part 2
-let questions = ["Who was the first American woman in space? ", 
-"True or false: 5 kilometer == 5000 meters? ",
-"(5 + 3)/2 * 10 = ? ",
-"Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ",
-"What is the minimum crew size for the ISS? "];
+let candidateAnswer= "" ;
+let questions=["Who was the first American woman in space? ","True or false: 5 kilometer == 5000 meters? ","(5 + 3)/2 * 10 = ? ","Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ","What is the minimum crew size for the ISS? "]
+let correctAnswers=["Sally Ride","true","40","Trajectory","3"];
+let candidateAnswers=[];
 
-let correctAnswers = ["Sally Ride", "true", "40","Trajectory", "3"];
-let candidateAnswers = [];
+
 
 
 function askForName() {
+  candidateName=input.question("What is your name?: ");
   // TODO 1.1b: Ask for candidate's name //
-  candidateName = input.question("What is your name? ") 
+
 }
 
 function askQuestion() {
-// TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer // 
-for (let i = 0; i < question.length; i++){
-  let stagingAnswer = input.question(questions[i]);
-  candidateAnswer.push(stagingAnswer)
-}
-}
+  // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
+/*console.log(question);
+candidateAnswer=input.question("Your Answer: ");*/
+   
+  for(let i=0;i<questions.length;i++)
+  {
+    //console.log(`${i+1}) ${questions[i]}`);
+    candidateAnswers.push(input.question(questions[i]));
+    //console.log(`Correct Answer: ${correctAnswers[i]}\n`);
 
+  }
+  }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-  console.log
-  (`
-  Candidate Name: ${candidateName} 
-  1) ${questions[0]}
-  Your answer: ${candidateAnswers[0]}
-  Correct Answer: ${correctAnswers[0]}
+  let grade;
+  let correctCount = 0;
   
-  2) ${questions[1]}
-  Your Answer: ${candidateAnswers[1]}
-  Correct Answer: ${correctAnswers[1]}
-  
-  3) ${questions[2]}
-  Your Answer: ${candidateAnswers[2]}
-  Correct Answer: ${correctAnswers[2]}
-  
-  4) ${questions[3]}
-  Your Answer: ${candidateAnswers[3]}
-  Correct Answer: ${correctAnswers[3]}
-  
-  5) ${questions[4]}
-  Your Answer: ${candidateAnswers[4]}
-  Correct Answer: ${correctAnswers[4]}`);
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  
+  for(let i=0;i<correctAnswers.length;i++)
+  {
+    
+    if((correctAnswers[i]).toLowerCase() === (candidateAnswers[i]).toLowerCase())
+    {
+      console.log(`Question ${i+1}: Correct`)
+      correctCount++;
+    }
+    else{
+      console.log(`Question ${i+1}: Incorrect, Correct Answer is ${correctAnswers[i]}`)
+    }
+  }
+grade=((correctCount)/(questions.length))*100;
 
+  console.log(`Candidate Name: ${candidateName}`)
+  for(let i=0;i<questions.length;i++)
+  {
+    console.log(`\n` + questions[i]);
+    console.log(`\nYour Answer : ${candidateAnswers[i]}`);
+    console.log(`\nCorrect Answer : ${correctAnswers[i]}`);
+    console.log("\n----------------------------")
+  }
+  console.log(`\nOverall Grade: ${grade}% (${correctCount} of ${questions.length} responses correct)`)
+  if(grade<80)
+  console.log("\nExam FAILED");
+  else
+  console.log("\nExam PASSED");
 
   return grade;
 }
 
 function runProgram() {
   askForName();
-  // TODO 1.1c: Greet candidate using their name //
-   console.log("Hello  ${candidateName} Welcome to the quiz");
+  // TODO 1.1c: Ask for candidate's name //
+  console.log(`Hello ${candidateName} Welcome to Candidate Testing`);
+  
+  
   askQuestion();
   gradeQuiz(this.candidateAnswers);
+  
 }
 
-// ----------- Don't write any code or change any code below this line ---------- //
+// Don't write any code below this line //
+// And don't change these or your program will not run as expected //
 module.exports = {
   candidateName: candidateName,
   question: question,
