@@ -78,7 +78,11 @@ grade=((correctCount)/(questions.length))*100;
 function runProgram() {
   askForName();
   // TODO 1.1c: Ask for candidate's name //
+<<<<<<< HEAD
   console.log(`Hello ${candidateName} Welcome to Candidate Testing`);
+=======
+  console.log(`Hello ${candidateName} Welcome into the Quiz`);
+>>>>>>> b908e7b9724b8624d162642ce062a24c7eb1b1c9
   
   
   askQuestion();
@@ -88,6 +92,22 @@ function runProgram() {
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
+<<<<<<< HEAD
+=======
+module.exports = {
+  candidateName: candidateName,
+  question: question,
+  correctAnswer: correctAnswer,
+  candidateAnswer: candidateAnswer,
+  questions: questions,
+  correctAnswers: correctAnswers,
+  candidateAnswers: candidateAnswers,
+  gradeQuiz: gradeQuiz,
+  runProgram: runProgram
+};
+
+// ----------- Don't write any code or change any code below this line ---------- //
+>>>>>>> b908e7b9724b8624d162642ce062a24c7eb1b1c9
 module.exports = {
   candidateName: candidateName,
   question: question,
